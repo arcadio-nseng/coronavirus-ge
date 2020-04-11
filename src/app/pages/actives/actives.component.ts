@@ -25,7 +25,7 @@ export class ActivesComponent implements OnInit {
     {data: [], label: 'Casos activos', backgroundColor: '#6C757D'},
   ];
 
-  constructor(private dataService: DataService, private titleService: Title) {
+  constructor(public dataService: DataService, private titleService: Title) {
     titleService.setTitle('Casos activos de COVID-19 en Guinea Ecuatorial');
   }
 

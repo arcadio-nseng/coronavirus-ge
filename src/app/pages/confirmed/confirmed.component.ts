@@ -33,7 +33,7 @@ export class ConfirmedComponent implements OnInit {
   ];
   tableData: TableData[] = [];
 
-  constructor(private dataService: DataService, private titleService: Title) {
+  constructor(public dataService: DataService, private titleService: Title) {
     titleService.setTitle('Casos confirmados de COVID-19 en Guinea Ecuatorial');
   }
 

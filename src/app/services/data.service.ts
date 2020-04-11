@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ReportCase, Data, ItemData, TableData, DistrictData} from "../interfaces/interfaces";
-import {Regions} from "../data.service";
+import {Regions} from "../interfaces/interfaces";
 import * as moment from "moment";
 
 @Injectable({

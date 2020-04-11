@@ -35,10 +35,10 @@ export class HomeComponent implements OnInit {
     {data: [], label: 'Recuperados', backgroundColor: '#28A745'},
     {data: [], label: 'Fallecidos', backgroundColor: '#DC3545'},
   ];
-  tableData: DistrictData[] = [];
+  // tableData: DistrictData[] = [];
 
-  constructor(private dataService: DataService, private titleService: Title) {
-    titleService.setTitle('Casos confirmados de COVID-19 en Guinea Ecuatorial');
+  constructor(public dataService: DataService, private titleService: Title) {
+    // titleService.setTitle('Coronavirus (COVID-19) en Guinea Ecuatorial');
   }
 
   ngOnInit(): void {

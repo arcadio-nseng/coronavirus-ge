@@ -32,7 +32,7 @@ export class RecoveredComponent implements OnInit {
   ];
   tableData: TableData[] = [];
 
-  constructor(private dataService: DataService, private titleService: Title) {
+  constructor(public dataService: DataService, private titleService: Title) {
     titleService.setTitle('Pacientes recuperados de COVID-19 en Guinea Ecuatorial');
   }
 
