@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~handsontable/dist/handsontable.full.css';
+
+html, body {
+  overflow-x: hidden;
+}
+/* styles.css */
+.skltn-card {
+  margin: 20px 0 48px;
+}
+.skltn-card__avatar {
+  width: 60px;
+  height: 60px; /* <-- Don't forget height */
+  margin-bottom: 20px;
+}
+.skltn-card__title {
+  height: 32px;
+  margin-bottom: 20px;
+}
+.skltn-card__line {
+  height: 20px;
+  margin-bottom: 20px;
+}
+.skltn-card__line:last-child {
+  width: 60%;
+}

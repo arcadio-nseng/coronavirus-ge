@@ -1,0 +1,57 @@
+<header class="mb-5" style="z-index: 100">
+  <nav class="navbar navbar-light bg-light  shadow fixed-top d-none d-md-flex " >
+    <a class="navbar-brand" routerLink="/">
+      <span class="btn" [ngClass]="homeButtonClass">
+        <fa-icon [icon]="['fas', 'home']"></fa-icon> Inicio
+      </span>
+    </a>
+    <div>
+      <a routerLink="/casos-confirmados" class="btn mx-2" [ngClass]="confirmedButtonClass"
+      >Confirmados <span class="badge badge-warning">{{totalReports}}</span></a>
+      <a routerLink="/recuperados" class="btn mx-2" [ngClass]="recoveredButtonClass"
+      >Recuperados <span class="badge badge-success">{{totalRecovered}}</span></a>
+      <a routerLink="/casos-activos" class="btn mx-2" [ngClass]="activesButtonClass"
+      >Activos <span class="badge badge-secondary">{{(totalReports - totalRecovered - totalDeaths) || ""}} </span></a>
+      <a routerLink="/fallecidos" class="btn mx-2 mr-0" [ngClass]="deathsButtonClass"
+      >Fallecidos <span class="badge badge-danger">{{totalDeaths}}</span></a>
+    </div>
+  </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top d-md-none">
+    <a class="navbar-brand" routerLink="/">
+      <span class="btn" [ngClass]="homeButtonClass">
+        <fa-icon [icon]="['fas', 'home']"></fa-icon> Inicio
+      </span>
+    </a>
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-outline-primary" routerLink="/casos-confirmados" >
+        Confirmados <span class="badge badge-warning">{{totalReports}}</span>
+      </button>
+      <button type="button" class="btn btn-outline-primary d-none d-sm-inline-block" routerLink="/recuperados" >
+        Recuperados <span class="badge badge-success">{{totalRecovered}}</span>
+      </button>
+
+      <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto ">
+
+        <li routerLink="/recuperados" class="nav-item border border-bottom-0 rounded-top px-2 d-flex justify-content-between align-items-center d-sm-none">
+          <a class="nav-link " >Pacientes recuperados </a>
+          <span class=" badge badge-success">{{totalRecovered}}</span>
+        </li>
+        <li routerLink="/casos-activos" class="nav-item border border-bottom-0 px-2 d-flex justify-content-between align-items-center">
+          <a class="nav-link " >Casos activos </a>
+          <span class=" badge badge-secondary">{{(totalReports - totalRecovered - totalDeaths) || "0"}}</span>
+        </li>
+        <li routerLink="/fallecidos" class="nav-item border rounded-bottom  px-2 d-flex justify-content-between align-items-center">
+          <a class="nav-link " >Fallecidos </a>
+          <span class="badge badge-danger">{{totalDeaths}}</span>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,185 @@
+{
+  "deaths": 0,
+  "lastUpdate": "3 Abr, 2020",
+  "recovereds": [
+    null,
+    {
+      "cases": 1,
+      "date": "31 Mar, 2020",
+      "foreigns": 0,
+      "men": 0,
+      "natives": 1,
+      "women": 1
+    }
+  ],
+  "reports": [
+    null,
+    {
+      "cases": 1,
+      "date": "14 Mar, 2020",
+      "foreigns": 0,
+      "link": "https://www.guineaecuatorialpress.com/noticia.php?id=15125",
+      "men": 0,
+      "natives": 1,
+      "regions": [
+        {
+          "BN": 1
+        }
+      ],
+      "title": "Ministerio de Sanidad y Bienestar Social",
+      "women": 1
+    },
+    {
+      "cases": 2,
+      "date": "19 Mar, 2020",
+      "foreigns": 2,
+      "link": "https://www.guineaecuatorialpress.com/noticia.php?id=15138",
+      "men": 2,
+      "natives": 0,
+      "regions": [
+        {
+          "BN": 2
+        }
+      ],
+      "title": "Ministerio de Sanidad y Bienestar social",
+      "women": 0
+    },
+    {
+      "cases": 3,
+      "date": "22 Mar, 2020",
+      "foreigns": 1,
+      "link": "https://www.guineaecuatorialpress.com/noticia.php?id=15150",
+      "men": 1,
+      "natives": 2,
+      "regions": [
+        {
+          "BN": 2,
+          "LT": 1
+        }
+      ],
+      "title": "Ministerio de Sanidad y Bienestar Social",
+      "women": 2
+    },
+    {
+      "cases": 2,
+      "date": "25 Mar, 2020",
+      "foreigns": 0,
+      "link": "https://www.guineaecuatorialpress.com/noticia.php?id=15166",
+      "men": 1,
+      "natives": 2,
+      "regions": [
+        {
+          "LT": 2
+        }
+      ],
+      "title": "Ministerio de Sanidad y Bienestar Social",
+      "women": 1
+    },
+    {
+      "cases": 1,
+      "date": "26 Mar, 2020",
+      "foreigns": 0,
+      "link": "https://www.guineaecuatorialpress.com/noticia.php?id=15173",
+      "men": 0,
+      "natives": 1,
+      "regions": [
+        {
+          "LT": 1
+        }
+      ],
+      "title": "Ministerio de Sanidad y Bienestar Social",
+      "women": 1
+    },
+    {
+      "cases": 1,
+      "date": "29 Mar, 2020",
+      "foreigns": 1,
+      "link": "https://www.guineaecuatorialpress.com/noticia.php?id=15186",
+      "men": 1,
+      "natives": 0,
+      "regions": [
+        {
+          "LT": 1
+        }
+      ],
+      "title": "Ministerio de Sanidad y Bienestar Social",
+      "women": 0
+    },
+    {
+      "cases": 1,
+      "date": "31 Mar, 2020",
+      "foreigns": 1,
+      "link": "https://www.guineaecuatorialpress.com/noticia.php?id=15207",
+      "men": 1,
+      "natives": 0,
+      "regions": [
+        {
+          "LT": 1
+        }
+      ],
+      "title": "Ministerio de Sanidad y Bienestar Social",
+      "women": 0
+    },
+    {
+      "cases": 1,
+      "date": "27 Mar, 2020",
+      "foreigns": 0,
+      "link": "https://www.guineaecuatorialpress.com/noticia.php?id=15177",
+      "men": 0,
+      "natives": 1,
+      "regions": [
+        {
+          "LT": 1
+        }
+      ],
+      "title": "Ministerio de Sanidad y Bienestar Social",
+      "women": 1
+    },
+    {
+      "cases": 1,
+      "date": "18 Mar, 2020",
+      "foreigns": 1,
+      "link": "https://www.guineaecuatorialpress.com/noticia.php?id=15129",
+      "men": 0,
+      "natives": 0,
+      "regions": [
+        {
+          "BN": 1
+        }
+      ],
+      "title": "Ministerio de Sanidad y Bienestar Social",
+      "women": 1
+    },
+    {
+      "cases": 2,
+      "date": "17 Mar, 2020",
+      "foreigns": 0,
+      "link": "https://www.guineaecuatorialpress.com/noticia.php?id=15128",
+      "men": 1,
+      "natives": 2,
+      "regions": [
+        {
+          "BN": 2
+        }
+      ],
+      "title": "Ministerio de Sanidad y Bienestar Social",
+      "women": 1
+    },
+    {
+      "cases": 1,
+      "date": "3 Abr, 2020",
+      "foreigns": 0,
+      "link": "https://ahoraeg.com/salud/2020/04/03/se-elevan-a-16-los-casos-confirmados-de-coronavirus-en-guinea-ecuatorial/",
+      "men": 1,
+      "natives": 1,
+      "regions": [
+        {
+          "LT": 1
+        },
+        "rc"
+      ],
+      "title": "Ministerio de Sanidad y Bienestar Social",
+      "women": 0
+    }
+  ]
+}

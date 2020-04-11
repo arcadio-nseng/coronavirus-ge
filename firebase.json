@@ -3,7 +3,7 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "dist/coronavirus-ge",
+    "public": "redirect",
     "ignore": [
       "firebase.json",
       "**/.*",

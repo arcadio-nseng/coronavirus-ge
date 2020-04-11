@@ -3,27 +3,22 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {ChartsModule} from "ng2-charts";
-import { BarChartComponent } from './bar-chart/bar-chart.component';
-import { PieChartComponent } from './pie-chart/pie-chart.component';
-import { MapComponent } from './map/map.component';
 import {HttpClientModule} from "@angular/common/http";
-import { LineChartComponent } from './line-chart/line-chart.component';
-import { NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
+import {ComponentsModule} from "./components/components.module";
+import {PagesModule} from "./pages/pages.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    BarChartComponent,
-    PieChartComponent,
-    MapComponent,
-    LineChartComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, ChartsModule, HttpClientModule, NgxSkeletonLoaderModule
+    AppRoutingModule,
+    HttpClientModule,
+    ComponentsModule,
+    PagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

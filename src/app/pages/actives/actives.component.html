@@ -1,0 +1,81 @@
+<app-header
+  [totalDeaths]="dataService.totalDeaths"
+  [totalRecovered]="dataService.totalRecovered"
+  [totalReports]="dataService.totalConfirmed"
+  activesButtonClass="btn-secondary"
+></app-header>
+<br>
+
+<div *ngIf="loading" class="container">
+  <app-skeleton-loader></app-skeleton-loader>
+</div>
+
+<section class="container pb-4" *ngIf="!loading">
+  <h1 class="lead">Casos Activos de COVID-19 en Guinea Ecuatorial</h1>
+  <hr>
+  <div class="row mb-5">
+    <div class="col-lg-8  mb-5">
+      <app-map [scale]="mapScale" [regionColors]="mapRegionValues"></app-map>
+    </div>
+    <div class="col-lg-4 ">
+      <div class="row">
+        <div class="col-md-6 col-lg-12 mb-5">
+          <app-pie-chart
+            [labels]="['Guineanos', 'Extranjeros']"
+            [data]="[dataService.activesData.natives, dataService.activesData.foreign]"
+            [colors]="['#02DBFF', '#6C757D']"
+          ></app-pie-chart>
+        </div>
+        <div class="col-md-6 col-lg-12">
+          <app-pie-chart
+            [labels]="['Hombres', 'Mujeres']"
+            [data]="[dataService.activesData.men, dataService.activesData.women]"
+            [colors]="['#02DBFF', '#6C757D']"
+          ></app-pie-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row mb-5">
+    <div class="col-md-8">
+      <app-bar-chart
+        [barChartLabels]="dataService.reportDates"
+        [barChartData]="barChartAccumulatedDataSet"
+        [legendConfig]="{display: false, position: 'bottom'}"
+        [titleConfig]="{display: true, text: 'Evolución de casos activos de coronavirus'}"
+      ></app-bar-chart>
+    </div>
+    <div class="col-md-4">
+      <table class="table table-bordered" >
+        <caption style="caption-side: top">Casos activos de coronavirus por distritos</caption>
+        <thead>
+        <tr>
+          <th>Distrito</th>
+          <th>Casos</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let district of districtData">
+          <td>{{dataService.getDistrictName(district.name)}}</td>
+          <td>{{district.value}}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <th>*</th>
+          <th>{{dataService.activesData.cases}}</th>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+</section>
+
+<section class="container">
+  <app-notice title="¿Cómo puedes evitar la propagación del coronavirus?"></app-notice>
+</section>
+
+<app-footer></app-footer>
+
