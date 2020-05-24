@@ -16,7 +16,7 @@ export class ConfirmedComponent implements OnInit {
   mapScale = {
     '0': '#02DBFF', //cero casos
     '1-10': '#FFA225', //uno a diez casos
-    '>10': '#FF8C44', //más de diez casos
+    '>10': '#BB2124', //más de diez casos
   };
   mapRegionValues: any;
   loading = true;

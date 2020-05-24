@@ -1,0 +1,46 @@
+<table class="table table-borderless border rounded">
+  <caption *ngIf="sourced">Datos proporcionados por <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a></caption>
+  <thead>
+  <tr>
+    <th colspan="2" class="text-warning h3">{{confirmed | number}} <small class="h6 text-black-50">Casos confirmados</small></th>
+  </tr>
+  <tr>
+    <th colspan="2">
+      <div class="d-flex ">
+        <div class="progress mr-1" [style.width.%]="(actives / confirmed) * 100">
+          <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="progress mr-1" [style.width.%]="(recovered / confirmed) * 100">
+          <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="progress" [style.width.%]="(deaths / confirmed) * 100">
+          <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><span class="badge badge-secondary">&nbsp;&nbsp;</span>&nbsp; Activos</td>
+    <td class="text-right">
+      <span class="badge badge-dark">{{actives | number}}</span>&nbsp;
+      <span class="badge badge-light text-black-50">{{(actives / confirmed) | percent: '2.2'}}</span>
+    </td>
+  </tr>
+  <tr>
+    <td><span class="badge badge-success">&nbsp;&nbsp;</span>&nbsp; Recuperados</td>
+    <td class="text-right">
+      <span class="badge badge-dark">{{recovered | number}}</span>&nbsp;
+      <span class="badge badge-light text-black-50">{{(recovered / confirmed) | percent: '2.2'}}</span>
+    </td>
+  </tr>
+  <tr>
+    <td><span class="badge badge-danger">&nbsp;&nbsp;</span>&nbsp; Fallecidos</td>
+    <td class="text-right">
+      <span class="badge badge-dark">{{deaths | number}}</span>&nbsp;
+      <span class="badge badge-light text-black-50">{{(deaths / confirmed) | percent: '2.2'}}</span>
+    </td>
+  </tr>
+  </tbody>
+</table>

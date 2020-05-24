@@ -14,39 +14,10 @@
   <h1 class="lead">Casos confirmados de COVID-19 en Guinea Ecuatorial</h1>
   <hr>
   <div class="row mb-5">
-    <div class="col-lg-8  mb-5">
+    <div class="col-12  mb-5">
       <app-map [scale]="mapScale" [regionColors]="mapRegionValues" ></app-map>
     </div>
-    <div class="col-lg-4 ">
-      <div class="row">
-        <div class="col-md-6 col-lg-12 mb-5">
-          <app-pie-chart
-                         [labels]="['Guineanos', 'Extranjeros']"
-                         [data]="[dataService.confirmedData.natives, dataService.confirmedData.foreign]"
-                         [colors]="['#02DBFF', '#FFA225']"
-          ></app-pie-chart>
-        </div>
-        <div class="col-md-6 col-lg-12">
-          <app-pie-chart
-                         [labels]="['Hombres', 'Mujeres']"
-                         [data]="[dataService.confirmedData.men, dataService.confirmedData.women]"
-                         [colors]="['#02DBFF', '#FFA225']"
-          ></app-pie-chart>
-        </div>
-      </div>
-    </div>
-  </div>
-  <hr>
-  <div class="row mb-5">
-    <div class="col-md-8">
-      <app-bar-chart
-        [barChartLabels]="lineChartLabels"
-        [barChartData]="barChartAccumulatedDataSet"
-        [legendConfig]="{display: false, position: 'bottom'}"
-        [titleConfig]="{display: true, text: 'Evolución acumulada de los casos positivos por fecha de reporte'}"
-      ></app-bar-chart>
-    </div>
-    <div class="col-md-4">
+    <!--<div class="col-md-4">
       <table class="table table-bordered" >
         <caption style="caption-side: top">Casos confirmados de coronavirus por distritos</caption>
         <thead>
@@ -68,7 +39,61 @@
         </tr>
         </tfoot>
       </table>
+    </div>-->
+  </div>
+  <!--<div class="row">
+    <div class="col-md-6 mb-5">
+      &lt;!&ndash;<p class="text-secondary text-center">Distribución de casos por edad</p>
+      <app-pie-chart
+        [labels]="['0 - 18', '19 - 59', '60 o más']"
+        [data]="dataService.ages"
+        [colors]="['#007bff', '#02DBFF', 'rgb(255, 162, 37)']"
+        [titleConfig]="{display: false, text: ''}"
+      ></app-pie-chart>&ndash;&gt;
+      <p class="text-secondary text-center">
+        <b>{{dataService.totalTests}}</b> tests realizados a fecha de <i>{{dataService.lastUpdate}}</i>
+      </p>
+      <app-pie-chart
+        [labels]="['Casos confirmados', 'Tests negativos']"
+        [data]="[dataService.totalConfirmed, dataService.totalTests - dataService.totalConfirmed]"
+        [colors]="['rgb(255, 162, 37)', '#02DBFF']"
+      ></app-pie-chart>
     </div>
+    <div class="col-md-6 mb-5">
+      <p class="text-secondary text-center">Distribución de casos por tipo de contagio</p>
+      <app-pie-chart
+        [labels]="['Local', 'Importado']"
+        [data]="[dataService.localCases, dataService.importedCases]"
+        [colors]="['#02DBFF', '#FFA225']"
+      ></app-pie-chart>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-5">
+      <p class="text-secondary text-center">Distribución de casos por nacionalidad</p>
+      <app-pie-chart
+        [labels]="['Guineanos', 'Extranjeros']"
+        [data]="[dataService.confirmedData.natives, dataService.confirmedData.foreign]"
+        [colors]="['#02DBFF', '#FFA225']"
+      ></app-pie-chart>
+    </div>
+    <div class="col-md-6 mb-5">
+      <p class="text-secondary text-center">Distribución de casos por sexo</p>
+      <app-pie-chart
+        [labels]="['Hombres', 'Mujeres']"
+        [data]="[dataService.confirmedData.men, dataService.confirmedData.women]"
+        [colors]="['#02DBFF', '#FFA225']"
+      ></app-pie-chart>
+    </div>
+  </div>-->
+  <hr>
+  <div class="mb-5">
+    <app-bar-chart
+      [barChartLabels]="lineChartLabels"
+      [barChartData]="barChartAccumulatedDataSet"
+      [legendConfig]="{display: false, position: 'bottom'}"
+      [titleConfig]="{display: true, text: 'Evolución acumulada de los casos positivos por fecha de reporte'}"
+    ></app-bar-chart>
   </div>
 
   <hr>

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import {Title} from "@angular/platform-browser";
-import {DistrictData, ItemData, TableData} from "../../interfaces/interfaces";
+import {DistrictData} from "../../interfaces/interfaces";
 import {ChartDataSets} from "chart.js";
 
 @Component({
@@ -15,10 +15,17 @@ export class HomeComponent implements OnInit {
   mapScale = {
     '0': '#02DBFF', //cero casos
     '1-10': '#FFA225', //uno a diez casos
-    '>10': '#FF8C44', //más de diez casos
+    '>10': '#BB2124', //más de diez casos
+  };
+  africaMapScale = {
+    '0-50': '#FED5D2',
+    '51-1000': '#E36059',
+    '>1000': '#BB2124',
   };
   mapRegionValues: any;
+  africaMapRegionValues: any;
   loading = true;
+  worldDataLoading = true;
   lineChartLabels: string[] = [];
   lineChartData: ChartDataSets[] = [
     {data: [], label: 'Confirmados', fill: true}
@@ -51,18 +58,34 @@ export class HomeComponent implements OnInit {
     else this.dataService.requestData().subscribe(data => {
       this.dataService.setData(data);
       this.loadData();
+      // console.log(data);
     });
 
+    if (!this.dataService.worldDataReady) {
+      this.dataService.requestWorldData().subscribe(data => {
+        // console.log(this.dataService.africaData);
+        this.dataService.setWorldData(data);
+        this.loadWorldData();
+      });
+      // this.dataService.setWorldData(null);
+      console.log(this.dataService.africaData);
+      // this.loadWorldData();
+    } else {
+      this.loadWorldData();
+    }
+
+  }
+
+  private loadWorldData() {
+    this.africaMapRegionValues = this.dataService.getAfricaRegionColors();
+    this.worldDataLoading = false;
   }
 
   private loadData () {
 
     this.lineChartLabels = this.dataService.getMainLineChartLabels();
     this.dataService.bindDataLabels(this.lineChartLabels, this.lineChartData, this.dataService.confirmed);
-    // this.barChartLabels = this.dataService.lastFewDays;
-    // this.dataService.bindDataLabels(this.barChartLabels, this.barChartDataSet, this.dataService.confirmed);
-    /*this.dataService.bindDataLabels(this.dataService.reportDates, this.barChartAccumulatedDataSet,
-      null, true);*/
+
     this.barChartAccumulatedDataSet[0].data = this.dataService.getAccumulatedDataSet(this.dataService.confirmedData.reportDates,
       this.dataService.confirmed);
 
@@ -72,8 +95,9 @@ export class HomeComponent implements OnInit {
       this.dataService.deaths);
 
 
+    // console.log(this.dataService.deathsRecoveredDates);
     let activesData = this.dataService.getActivesAccumulatedDataSet();
-    this.dataService.recoveredData.reportDates.forEach(date => {
+    this.dataService.deathsRecoveredDates.forEach(date => {
       this.bundleBarchartDataSet[0].data.push(activesData[this.dataService.reportDates.findIndex(d => d === date)]);
     });
     this.bundleBarchartDataSet[0].data.push(activesData[activesData.length - 1]);
@@ -83,10 +107,7 @@ export class HomeComponent implements OnInit {
 
     this.mapRegionValues = this.dataService.getRegionColors(this.dataService.confirmedData.regions);
 
-
-    this.dataService.reportDates.forEach(date => {
-
-    })
+    // console.log(this.dataService.ages, this.dataService.localCases, this.dataService.importedCases);
 
     this.loading = false;
 

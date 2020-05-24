@@ -8,11 +8,13 @@ import {ChartsModule} from "ng2-charts";
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {FaIconLibrary, FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {faHome, faPhoneAlt} from "@fortawesome/free-solid-svg-icons";
+import {faComment, faHome, faInfoCircle, faPhoneAlt} from "@fortawesome/free-solid-svg-icons";
 import {RouterModule} from "@angular/router";
 import { NoticeComponent } from './notice/notice.component';
 import { SkeletonLoaderComponent } from './skeleton-loader/skeleton-loader.component';
 import {NgxSkltnModule} from "ngx-skltn";
+import { AfricaMapComponent } from './africa-map/africa-map.component';
+import { SummaryChartComponent } from './summary-chart/summary-chart.component';
 
 
 @NgModule({
@@ -24,18 +26,21 @@ import {NgxSkltnModule} from "ngx-skltn";
     HeaderComponent,
     FooterComponent,
     NoticeComponent,
-    SkeletonLoaderComponent
+    SkeletonLoaderComponent,
+    AfricaMapComponent,
+    SummaryChartComponent
   ],
-  exports: [
-    MapComponent,
-    LineChartComponent,
-    BarChartComponent,
-    PieChartComponent,
-    HeaderComponent,
-    FooterComponent,
-    NoticeComponent,
-    SkeletonLoaderComponent
-  ],
+    exports: [
+        MapComponent,
+        LineChartComponent,
+        BarChartComponent,
+        PieChartComponent,
+        HeaderComponent,
+        FooterComponent,
+        NoticeComponent,
+        SkeletonLoaderComponent,
+        SummaryChartComponent
+    ],
   imports: [
     CommonModule,
     ChartsModule,
@@ -44,6 +49,6 @@ import {NgxSkltnModule} from "ngx-skltn";
 })
 export class ComponentsModule {
   constructor(private iconLibrary: FaIconLibrary) {
-    iconLibrary.addIcons(faPhoneAlt, faHome)
+    iconLibrary.addIcons(faPhoneAlt, faHome, faComment, faInfoCircle)
   }
 }

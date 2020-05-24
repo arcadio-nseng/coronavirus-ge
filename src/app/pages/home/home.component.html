@@ -11,95 +11,75 @@
 </div>
 
 <section class="container pb-4" *ngIf="!loading">
-  <h1 class="h3">Coronavirus en Guinea Ecuatorial</h1>
-  <hr>
-  <p class="lead">
+  <p class="lead sr-only">
     La pandemia del COVID-19, cuyo primer caso en Guinea Ecuatorial fue anunciado el 14 de marzo de 2020,
     ha dejado hasta la fecha un total de {{dataService.totalConfirmed}} casos confirmados de los cuales
     {{dataService.totalRecovered}} han sido dado de alta y {{dataService.totalDeaths}} han fallecido.
   </p>
-  <hr>
   <div class="row mb-5">
-    <div class="col-lg-6  mb-5">
-      <p class="text-secondary">Distribución geográfica de los casos confirmados</p>
+    <div class="col-md-5">
+      <h1 class="h3">Coronavirus en Guinea Ecuatorial</h1>
+      <app-summary-chart
+        [confirmed]="dataService.totalConfirmed"
+        [recovered]="dataService.totalRecovered"
+        [deaths]="dataService.totalDeaths"
+      ></app-summary-chart>
+    </div>
+    <div class="col-md-7">
+      <p class="text-secondary text-center">Distribución geográfica de los casos confirmados</p>
       <app-map
         [scale]="mapScale"
         [regionColors]="mapRegionValues"
         legendTitle="Casos confirmados"
       ></app-map>
     </div>
-    <div class="col-lg-6 ">
-      <div class="table-responsive">
-        <table class="table table-bordered" >
-          <caption style="caption-side: top">Datos generales de coronavirus por distrito</caption>
-          <thead>
-          <tr>
-            <th>Distrito</th>
-            <th>Confirmados</th>
-            <th>Recuperados</th>
-            <th>Activos</th>
-            <th>fallecidos</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let district of districtData">
-            <td>{{dataService.getDistrictName(district.name)}}</td>
-            <td>{{district.confirmed}}</td>
-            <td>{{district.recovered}}</td>
-            <td>{{district.actives}}</td>
-            <td>{{district.deaths}}</td>
-          </tr>
-          </tbody>
-          <tfoot>
-          <tr>
-            <th>*</th>
-            <th>{{dataService.confirmedData.cases}}</th>
-            <th>{{dataService.recoveredData.cases}}</th>
-            <th>{{dataService.activesData.cases}}</th>
-            <th>{{dataService.deathsData.cases}}</th>
-          </tr>
-          </tfoot>
-        </table>
-      </div>
+  </div>
+  <hr>
+
+  <p class="sr-only">Datos oficiales del coronavirus (COVID-19) en el continente Africano</p>
+  <div class="row mb-5" *ngIf="!worldDataLoading">
+    <div class="col-md-5">
+      <h2 class="h3">Situación del COVID-19 en África</h2>
+      <app-summary-chart
+        [confirmed]="dataService.africaData.summary.confirmed"
+        [recovered]="dataService.africaData.summary.recovered"
+        [deaths]="dataService.africaData.summary.deaths"
+        [sourced]="true"
+      ></app-summary-chart>
+    </div>
+    <div class="col-md-7">
+      <p class="text-secondary text-center">Distribución geográfica de los casos confirmados</p>
+      <app-map
+        [map]="'africa_mill'"
+        [scale]="africaMapScale"
+        [regionColors]="africaMapRegionValues"
+        [zoomConfig]="{enabled: true, min: 1, max: 10}"
+        legendTitle="Casos confirmados"
+      ></app-map>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-6 mb-5">
-      <app-pie-chart
-        [labels]="['Casos confirmados', 'Tests realizados']"
-        [data]="[dataService.totalConfirmed, dataService.totalTests]"
-        [colors]="['rgb(255, 162, 37)', '#007bff']"
-      ></app-pie-chart>
-    </div>
-    <div class="col-md-6 mb-5">
-      <app-pie-chart
-        [labels]="['Casos confirmados', 'Recuperados']"
-        [data]="[dataService.totalConfirmed, dataService.totalRecovered]"
-        [colors]="['rgb(255, 162, 37)', '#28a745']"
-      ></app-pie-chart>
-    </div>
-  </div>
-  <div class="row">
+  <!--<div class="row">
     <div class="col-md-6 mb-5">
       <p class="text-secondary text-center">Distribución de los casos confirmados por nacionalidad</p>
       <app-pie-chart
         [labels]="['Guineanos', 'Extranjeros']"
         [data]="[dataService.confirmedData.natives, dataService.confirmedData.foreign]"
-        [colors]="['#02DBFF', '#007bff']"
+        [colors]="['#007bff', '#02DBFF']"
         [titleConfig]="{display: false, text: ''}"
       ></app-pie-chart>
     </div>
     <div class="col-md-6">
-      <p class="text-secondary text-center">Distribución de los casos confirmados por sexo</p>
+      <p class="text-secondary text-center">Distribución de los casos confirmados por tipo de contagio</p>
       <app-pie-chart
-        [labels]="['Hombres', 'Mujeres']"
-        [data]="[dataService.confirmedData.men, dataService.confirmedData.women]"
-        [colors]="['#02DBFF', '#007bff']"
+        [labels]="['Local', 'Importado']"
+        [data]="[dataService.localCases, dataService.importedCases]"
+        [colors]="['#007bff', '#02DBFF']"
         [titleConfig]="{display: false, text: ''}"
       ></app-pie-chart>
     </div>
-  </div>
+  </div>-->
+
 
   <hr>
   <div class="mb-5">
@@ -136,34 +116,6 @@
       [titleConfig]="{display: false, text: ''}"
     ></app-line-chart>
   </div>
-
-
-  <!--<div class="table-responsive">
-    <table class="table table-bordered table-sm">
-      <caption style="caption-side: top">Historial de reportes de casos positivos de corornavirus</caption>
-      <thead>
-      <tr>
-        <th>Fecha</th>
-        <th>Casos <span class="lead">(acumulado)</span></th>
-        <th>Fuente</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let report of tableData">
-        <td>{{report.date}}</td>
-        <td>
-          <b>{{report.cases}}</b> <span class="lead h6"> &nbsp;({{report.accumulated}})</span>
-          <span class="float-right {{report.class}}" title="Incremento respecto al día anterior">
-            <fa-icon [icon]="['fas', report.icon]"></fa-icon>&nbsp;
-            <span *ngIf="report.increment !== 0">{{report.increment | percent}}</span>
-          </span>
-        </td>
-        <td><a href="{{report.link}}">{{report.title}}</a></td>
-      </tr>
-      </tbody>
-
-    </table>
-  </div>-->
 
 </section>
 

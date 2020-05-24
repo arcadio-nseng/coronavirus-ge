@@ -2,8 +2,17 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import {CountryData} from "../app/interfaces/interfaces";
+
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: '/assets/data/world-data.json',
+  africaCountryCodes: [
+    'BF','DJ','BI','BJ','ZA','BW','DZ','ET','RW','TZ','GQ','NA','NE','NG',
+    'TN','LR','LS','ZW','TG','TD','ER','LY','GW','ZM','CI','EH','CM','EG',
+    'SL','CG','CF','AO','CD','GA','GN','GM','XS','CV','GH','SZ','MG','MA',
+    'KE','SS','ML','KM','ST','MW','SO','SN','MR','UG','SD','MZ','SC','MU'
+  ]
 };
 
 /*

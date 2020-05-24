@@ -1,8 +1,19 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {ReportCase, Data, ItemData, TableData, DistrictData} from "../interfaces/interfaces";
+import {
+  ReportCase,
+  Data,
+  ItemData,
+  TableData,
+  DistrictData,
+  ApiResult,
+  AfricaData,
+} from "../interfaces/interfaces";
 import {Regions} from "../interfaces/interfaces";
 import * as moment from "moment";
+import {catchError} from "rxjs/operators";
+import {throwError} from "rxjs";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +37,16 @@ export class DataService {
   totalDeaths: number;
   totalTests: number;
   dataReady = false;
+  worldDataReady = false;
+  localCases = 0;
+  importedCases = 0;
+  ages: number[] = [0,0,0];
+
+  worldData: ApiResult;
+  africaData: AfricaData = {
+    summary: {confirmed: 0, recovered: 0, deaths: 0, actives: 0},
+    countries: []
+  }
 
   constructor(private httpClient: HttpClient) {
     moment.locale('es', {monthsShort:
@@ -64,6 +85,17 @@ export class DataService {
 
   }
 
+  requestWorldData() {
+    return this.httpClient.get<ApiResult>('https://api.covid19api.com/summary')
+      .pipe(catchError(this.handleError));
+  }
+
+  handleError (error) {
+    this.africaData = JSON.parse(window.localStorage.getItem('_data'));
+    console.log('se ha producido un error');
+    return throwError(error);
+  }
+
   setData (data: Data) {
 
     this.confirmed = data.reports;
@@ -83,12 +115,53 @@ export class DataService {
     this.sortData(this.recovered);
     this.sortData(this.deaths);
 
+    this.classify();
+
     this.totalConfirmed = this.confirmedData.cases;
     this.totalRecovered = this.recoveredData.cases;
     this.totalActives = this.activesData.cases;
     this.totalDeaths = this.deathsData.cases;
 
     this.dataReady = true;
+
+  }
+
+  setWorldData(data: ApiResult) {
+
+    if (data === null) {
+      this.africaData = JSON.parse(window.localStorage.getItem('_data'));
+      this.worldDataReady = true;
+      return;
+    }
+    environment.africaCountryCodes.forEach(country => {
+      let countryData = data.Countries.find(c => c.CountryCode === country);
+
+      if (countryData) {
+
+        this.africaData.summary.confirmed += country === 'GQ' ? this.totalConfirmed : countryData.TotalConfirmed;
+        this.africaData.summary.recovered += country === 'GQ' ? this.totalRecovered : countryData.TotalRecovered;
+        this.africaData.summary.deaths += country === 'GQ' ? this.totalDeaths : countryData.TotalDeaths;
+        this.africaData.countries.push({
+          countryCode: country,
+          confirmed: country === 'GQ' ? this.totalConfirmed : countryData.TotalConfirmed,
+          recovered: country === 'GQ' ? this.totalRecovered : countryData.TotalRecovered,
+          deaths: country === 'GQ' ? this.totalDeaths : countryData.TotalDeaths
+        });
+
+        this.africaData.countries.sort(function (a, b) {
+          return b.confirmed - a.confirmed;
+        });
+
+      } else {
+        // console.log(country, ' no existe');
+      }
+    });
+
+    this.africaData.summary.actives = this.africaData.summary.confirmed
+      - this.africaData.summary.recovered - this.africaData.summary.deaths;
+
+    window.localStorage.setItem('_data', JSON.stringify(this.africaData));
+    this.worldDataReady = true;
 
   }
 
@@ -155,7 +228,17 @@ export class DataService {
 
   }
 
-  getDistrictName (abr: string) {
+  getAfricaRegionColors(colorConfig: string[] = ['0-50', '51-1000', '>1000']) {
+    let regionColors = {};
+    this.africaData.countries.forEach(country => {
+      if (country.confirmed <= 50) regionColors[country.countryCode] = colorConfig[0];
+      else if (country.confirmed <= 1000) regionColors[country.countryCode] = colorConfig[1];
+      else if (country.confirmed > 1000) regionColors[country.countryCode] = colorConfig[2];
+    });
+    return regionColors;
+  }
+
+  /*getDistrictName (abr: string) {
 
     switch (abr) {
       case 'Ml': return 'Malabo';
@@ -179,7 +262,7 @@ export class DataService {
       default: return 'Distrito desconocido';
     }
 
-  }
+  }*/
 
   getAccumulatedDataSet (labels: string[], data: ReportCase[]): number[] {
 
@@ -277,7 +360,7 @@ export class DataService {
 
 
     let dataItem: ItemData = {cases: 0, men: 0, women: 0, natives: 0, foreign: 0, regions: null, reportDates: null,
-      date: null, link: null, title: null};
+      date: null, link: null, title: null, ages: null, types: null};
 
     dataItem.cases = this.countItems(data, 'cases');
     dataItem.men = this.countItems(data, 'men');
@@ -302,6 +385,20 @@ export class DataService {
     data.forEach(item => total += item[field]);
 
     return total;
+
+  }
+
+  private classify () {
+
+    this.confirmed.forEach( report => {
+      this.localCases += report.types.local;
+      this.importedCases += report.types.imported;
+      report.ages.forEach( age => {
+        if (age <= 18) this.ages[0]++;
+        else if (age <= 59) this.ages[1]++;
+        else this.ages[2]++;
+      })
+    });
 
   }
 
@@ -371,7 +468,7 @@ export class DataService {
   private setActiveData () {
 
     let data: ItemData = {cases: 0, men: 0, women: 0, natives: 0, foreign: 0, regions: null, reportDates: null,
-      date: null, link: null, title: null};
+      date: null, link: null, title: null, types: null, ages: null};
 
     data.men = this.confirmedData.men - this.recoveredData.men - this.deathsData.men;
     data.cases = this.confirmedData.cases - this.recoveredData.cases - this.deathsData.cases;

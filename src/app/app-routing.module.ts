@@ -5,27 +5,27 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './pages/home/home.module#HomeModule'
+    loadChildren: () => import('./pages/home/home.module').then(mod => mod.HomeModule)
   },
   {
     path: 'casos-confirmados',
-    loadChildren: './pages/confirmed/confirmed.module#ConfirmedModule'
+    loadChildren: () => import('./pages/confirmed/confirmed.module').then(mod => mod.ConfirmedModule)
   },
   {
     path: 'casos-activos',
-    loadChildren: './pages/actives/actives.module#ActivesModule'
+    loadChildren: () => import('./pages/actives/actives.module').then(mod => mod.ActivesModule)
   },
   {
     path: 'fallecidos',
-    loadChildren: './pages/deaths/deaths.module#DeathsModule'
+    loadChildren: () => import('./pages/deaths/deaths.module').then(mod => mod.DeathsModule)
   },
   {
     path: 'recuperados',
-    loadChildren: './pages/recovered/recovered.module#RecoveredModule'
+    loadChildren: () => import('./pages/recovered/recovered.module').then(mod => mod.RecoveredModule)
   },
   {
     path: '**',
-    loadChildren: './pages/home/home.module#HomeModule'
+    loadChildren: () => import('./pages/home/home.module').then(mod => mod.HomeModule)
   },
 ];
 

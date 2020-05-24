@@ -1,14 +1,21 @@
-import {Component, Input, OnInit} from '@angular/core';
-
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+// import * as $ from 'jquery';
+declare var $: any;
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements AfterViewInit {
 
-  @Input() config: any;
+  @Input() map: 'eg_district' | 'africa_mill' = 'eg_district';
+  // @Input() config: any;
+  @Input() zoomConfig: {enabled: boolean, min: number, max: number} = {
+    enabled: false,
+    min: 1,
+    max: 1
+  }
   @Input() regionColors: any[] = [];
   @Input() legendTitle: string = 'Casos';
   @Input() scale = {
@@ -18,15 +25,15 @@ export class MapComponent implements OnInit {
   }
   constructor() { }
 
-  ngOnInit() {
-    // @ts-ignore
-    $('#map').vectorMap({
-      map: 'eg_district',
+  ngAfterViewInit() {
+
+    $(`#${this.map}`).vectorMap({
+      map: this.map,
       markersSelectable: true,
       backgroundColor: '#ffffff',
-      zoomButtons : false,
-      zoomMax: 1,
-      zoomMin: 1,
+      zoomButtons : this.zoomConfig.enabled,
+      zoomMax: this.zoomConfig.max,
+      zoomMin: this.zoomConfig.min,
       regionStyle: {
         initial: {
           stroke: 'white',
@@ -46,8 +53,14 @@ export class MapComponent implements OnInit {
             title: this.legendTitle
           }
         }]
+      },
+      onRegionTipShow: (e, label, code) => {
+        console.log(label.text());
+        label.text(`Code: ${code}`)
       }
     });
   }
+
+
 
 }

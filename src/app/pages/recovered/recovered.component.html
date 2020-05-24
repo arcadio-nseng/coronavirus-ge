@@ -14,10 +14,10 @@
   <h1 class="lead">Pacientes recuperados de COVID-19 en Guinea Ecuatorial</h1>
   <hr>
   <div class="row mb-5">
-    <div class="col-lg-8  mb-5">
+    <div class="col-12 mb-5">
       <app-map [scale]="mapScale" [regionColors]="mapRegionValues" ></app-map>
     </div>
-    <div class="col-lg-4 ">
+    <!--<div class="col-lg-4 ">
       <div class="row">
         <div class="col-md-6 col-lg-12 mb-5">
           <app-pie-chart
@@ -34,11 +34,11 @@
           ></app-pie-chart>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
   <hr>
   <div class="row mb-5">
-    <div class="col-md-8">
+    <div class="col-12">
       <app-bar-chart
         [barChartLabels]="lineChartLabels"
         [barChartData]="barChartAccumulatedDataSet"
@@ -46,7 +46,7 @@
         [titleConfig]="{display: true, text: 'Evolución acumulada de los pacientes recuperados'}"
       ></app-bar-chart>
     </div>
-    <div class="col-md-4">
+    <!--<div class="col-md-4">
       <table class="table table-bordered" >
         <caption style="caption-side: top">Casos confirmados de coronavirus por distritos</caption>
         <thead>
@@ -68,7 +68,7 @@
         </tr>
         </tfoot>
       </table>
-    </div>
+    </div>-->
   </div>
 
   <hr>
@@ -109,6 +109,7 @@
           <b>{{report.cases}}</b> <span class="lead h6"> &nbsp;({{report.accumulated}})</span>
           <span class="float-right {{report.class}}" title="Incremento respecto al día anterior">
             <fa-icon [icon]="['fas', report.icon]"></fa-icon>&nbsp;
+            <span *ngIf="report.increment !== 0">{{report.increment | percent}}</span>
           </span>
         </td>
         <td><a href="{{report.link}}">{{report.title}}</a></td>
