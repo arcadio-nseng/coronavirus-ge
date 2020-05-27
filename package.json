@@ -44,7 +44,7 @@
     "datatables.net-bs4": "^1.10.20",
     "express": "^4.15.2",
     "handsontable": "^7.4.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jvectormap": "^2.0.4",
     "moment": "^2.24.0",
     "ng2-charts": "^2.3.0",
