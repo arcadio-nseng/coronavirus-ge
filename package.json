@@ -42,7 +42,7 @@
     "chartjs-plugin-annotation": "^0.5.7",
     "chartjs-plugin-datalabels": "^0.7.0",
     "datatables.net-bs4": "^1.10.20",
-    "express": "^4.15.2",
+    "express": "^4.17.3",
     "handsontable": "^7.4.2",
     "jquery": "^3.4.1",
     "jvectormap": "^2.0.4",
